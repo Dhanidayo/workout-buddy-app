@@ -1,0 +1,19 @@
+This is the method to get all workouts posted by everybody on the application without limit to the user that created them.
+This is an implementation for something like when you are on the homepage of twitter, etc. You get to see not just your posts but other people's posts too.
+
+//get all workouts
+const getWorkouts = async (req, res) => {
+  const workouts = await Workout.find({}).sort({ createdAt: -1 });
+
+  res.status(200).json(workouts);
+};
+
+This is the method to fet all workouts posted by a particular user.
+This is similar to view all our posts on our profile on twitter, facebook, etc.
+const getWorkouts = async (req, res) => {
+  const user_id = req.user._id;
+
+  const workouts = await Workout.find({ user_id }).sort({ createdAt: -1 });
+
+  res.status(200).json(workouts);
+};
